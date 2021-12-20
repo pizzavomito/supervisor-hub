@@ -41,6 +41,14 @@ module.exports = class Jobs {
       this.execute(supervisor.id)
     })
 
+    Cache.on('update', () => {
+      for (const id in this.workers) {
+        this.workers[id].forEach(worker => {
+          worker.instance.postMessage({cache: Cache.map})
+        })
+      }
+    })
+
   }
 
   runWorker(file, workerData) {
@@ -153,6 +161,10 @@ module.exports = class Jobs {
         {id: supervisor.id,  notifiers, cache: Cache.map, interval: 10000})
 
       getAllProcessInfoWorker.on('message', message => {
+        const arr = [1, 2, 3, 4, 5, 6, 9, 7, 8, 9, 10]
+        arr.reverse()
+        const used = process.memoryUsage().heapUsed / 1024 / 1024
+        console.log(`The script uses approximately ${Math.round(used * 100) / 100} MB`)
 
         supervisor.error = null
         if (message.error) {
@@ -193,13 +205,6 @@ module.exports = class Jobs {
 
       this.supervisorIds.push(supervisor.id)
 
-      Cache.on('update', () => {
-        for (const id in this.workers) {
-          this.workers[id].forEach(worker => {
-            worker.instance.postMessage({cache: Cache.map})
-          })
-        }
-      })
     }
   }
 }

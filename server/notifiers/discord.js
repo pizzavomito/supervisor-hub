@@ -14,6 +14,7 @@ module.exports = class DiscordNotifier {
       if(this.supervisor) {
         name = this.supervisor.name
       }
+      console.log('Discord send error', name, msg);
       this.hook.setUsername('Supervisor Hub')
       this.hook.error('**Alarm**',name, msg)
     }

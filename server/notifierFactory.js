@@ -2,7 +2,7 @@ const DiscordNotifier = require('./notifiers/discord')
 const SlackNotifier = require('./notifiers/slack')
 module.exports = class NotifierFactory {
   static create(config) {
-    switch(config.type) {
+    switch(config.key) {
       case 'discord':
         return new DiscordNotifier({...config})
       case 'slack':

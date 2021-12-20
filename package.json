@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "express": "^4.17.1",
-    "cross-env": "^5.2.0",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7",
-    "vuetify": "^2.5.5",
+    "cross-env": "^5.2.0",
+    "discord-webhook-node": "^1.1.8",
+    "express": "^4.17.1",
     "lodash": "^4.17.21",
     "lowdb": "^1.0.0",
     "moment": "^2.29.1",
+    "nuxt": "^2.15.7",
     "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0",
     "supervisord": "^0.1.0",
-    "webhook-discord": "^3.7.8"
+    "vuetify": "^2.5.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

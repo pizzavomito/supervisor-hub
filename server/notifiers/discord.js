@@ -1,19 +1,21 @@
-const wh = require("webhook-discord")
-// https://discord.com/api/webhooks/917135250231013388/srSG52Cb1mVSYZlT_LmJ2quAqT_staftv2zHz7Rx2tecZ6BBznOmCh-LKTP_j79K9QBD
+const { Webhook } = require('discord-webhook-node');
+
 module.exports = class DiscordNotifier {
     hook
     supervisor
     constructor({webhook}) {
       if (webhook) {
-        this.hook = new wh.Webhook(webhook)
+        this.hook = new Webhook(webhook);
       }
     }
 
     notifyError(msg) {
-      // let name = 'Supervisor Hub'
-      // if(this.supervisor) {
-      //   name = this.supervisor.name
-      // }
-      // this.hook.err('Supervisor Hub', msg)
+      let name = 'Supervisor Hub'
+      if(this.supervisor) {
+        name = this.supervisor.name
+      }
+
+      this.hook.setUsername('Supervisor Hub')
+      this.hook.error('Alarm',name,msg)
     }
 }

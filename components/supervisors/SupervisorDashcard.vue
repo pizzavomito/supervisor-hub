@@ -111,7 +111,7 @@
             <v-icon left>mdi-refresh</v-icon>
             Refresh
           </v-btn>
-          <v-btn small text @click="openSupervisorForm = true">
+          <v-btn small text @click="onEditSupervisor(supervisor)">
             <v-icon left>mdi-pencil</v-icon>
             Edit
           </v-btn>

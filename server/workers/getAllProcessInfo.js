@@ -25,7 +25,7 @@ class GetAllProcessInfo extends Worker {
       if (error) {
         console.log(error)
         if (this.supervisor.notification === true && this.supervisor.alarmConnectionFailed === true) {
-          this.notify(error)
+          this.notify(error.toString())
         }
         this.postMessage({id: this.supervisor.id, process, state, error})
         return

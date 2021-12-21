@@ -40,22 +40,28 @@
                   <v-list-item-subtitle class="text-sm-caption">Displays an alarm if a condition is satisfied.</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-
-              <v-list-item>
-                <v-list-item-action>
-                  <v-switch v-model="supervisor.alarmConnectionFailed" inset dense color="success"
-                            label="when the connection to the supervisor has failed"></v-switch>
-                </v-list-item-action>
-                <!--              <v-list-item-content>-->
-                <!--                <v-list-item-title>when the connection to the supervisor has failed</v-list-item-title>-->
-                <!--              </v-list-item-content>-->
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-switch v-model="supervisor.alarmProcessError" inset dense color="success"
-                            label="when a process is in error"></v-switch>
-                </v-list-item-action>
-              </v-list-item>
+              <v-list-item-group
+                v-model="alarmsSelected"
+                multiple
+              >
+                <template v-for="item in alarmItems">
+                  <v-list-item
+                    :key="item.prop"
+                    :value="item.prop"
+                  >
+                    <template #default="{ active }">
+                      <v-list-item-action>
+                        <v-switch inset dense color="success"
+                                  :input-value="active" :label="item.name"
+                        ></v-switch>
+                      </v-list-item-action>
+                      <v-list-item-content>
+                        <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
 
             </v-list>
             <v-list flat>
@@ -241,6 +247,16 @@ export default {
     supervisor: {},
     process: [],
     query: '',
+    alarmItems: [
+      {
+        prop : 'alarmConnectionFailed',
+        name: 'when the connection to the supervisor has failed'
+      },
+      {
+        prop : 'alarmProcessError',
+        name: 'when a process is in error'
+      }
+    ]
   }),
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
@@ -292,6 +308,33 @@ export default {
           if (this.supervisor.notifiers.includes(notifier) === false) {
             this.supervisor.notifiers.push(notifier)
           }
+        })
+
+        this.$axios.post('/api/supervisors', this.supervisor)
+      }
+    },
+    alarmsSelected: {
+      get() {
+        const alarmsSelected = []
+        this.alarmItems.forEach(alarm => {
+          if (this.supervisor[alarm.prop] === true) {
+            alarmsSelected.push(alarm.prop)
+          }
+        })
+        return alarmsSelected
+      },
+      set(values) {
+        this.alarmItems.forEach(alarm => {
+          this.supervisor[alarm.prop] = false
+        })
+        values.forEach(value => {
+          let alarm = null
+          if (value instanceof Object) {
+            alarm = value.id
+          } else {
+            alarm = value
+          }
+          this.supervisor[alarm] = true
         })
 
         this.$axios.post('/api/supervisors', this.supervisor)

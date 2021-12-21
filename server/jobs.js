@@ -113,6 +113,9 @@ module.exports = class Jobs {
   }
 
   getCountAlarm(supervisor) {
+    if (supervisor.enable === false) {
+      return 0
+    }
     let count = 0
     if (supervisor.error && supervisor.alarmConnectionFailed) {
       count++

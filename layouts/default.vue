@@ -202,13 +202,6 @@ export default {
 
     this.ready = true
 
-    // this.$socket.on('action.stop', methods.onStop)
-    // this.$socket.on('action.start', methods.onStart)
-    // this.$socket.on('action.restart', methods.onRestart)
-    // this.$socket.on('action.startAll', methods.onStartAll)
-    // this.$socket.on('action.stopAll', methods.onStopAll)
-    // this.$socket.on('action.restartAll', methods.onRestartAll)
-
     this.$socket.on('supervisors.change', methods.onSupervisorsChange)
     this.$socket.on('supervisors.list', methods.onSupervisorsList)
 

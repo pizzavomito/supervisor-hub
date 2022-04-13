@@ -50,7 +50,7 @@
 
 <!--        </v-list>-->
         <v-list dense>
-          <v-subheader>Categories</v-subheader>
+          <v-subheader><v-icon color="warning">mdi-folder-outline</v-icon> &nbsp; Categories</v-subheader>
 
               <v-btn color="default" class="mb-4" x-small
                      @click="onEditCategory(null)">
@@ -80,7 +80,7 @@
           </v-list-item>
         </v-list>
         <v-list dense>
-          <v-subheader>Notifications</v-subheader>
+          <v-subheader><v-icon color="warning">mdi-send-circle-outline</v-icon> &nbsp; Notifications</v-subheader>
           <v-btn color="default" class="mb-4" x-small
                  @click="onEditNotifier(null)">
             <v-icon left>mdi-plus</v-icon>

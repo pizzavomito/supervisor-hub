@@ -120,7 +120,7 @@
                   {{ supervisor.countProcess }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
-                  <v-icon v-if="supervisor.notifiers.length > 1" small>mdi-campaign</v-icon>
+                  <v-icon v-if="supervisor.notifiers.length > 0" small color="warning">mdi-send-circle-outline</v-icon>
                   <category-label v-if="supervisor.category" :category-id="supervisor.category"></category-label>
                 </v-list-item-subtitle>
                 <v-list-item-subtitle v-if="!supervisor.enable">Currently disabled</v-list-item-subtitle>

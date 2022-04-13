@@ -38,6 +38,7 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-list-item-action-text>
+                <v-icon v-if="supervisor.notifiers.length > 0" small color="warning">mdi-send-circle-outline</v-icon>
                 <category-label v-if="supervisor.category" :category-id="supervisor.category"></category-label>
               </v-list-item-action-text>
             </v-list-item-action>

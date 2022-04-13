@@ -52,7 +52,7 @@
         <v-list dense>
           <v-subheader>Categories</v-subheader>
 
-              <v-btn color="default" class="mb-4" x-small text
+              <v-btn color="default" class="mb-4" x-small
                      @click="onEditCategory(null)">
                 <v-icon left>mdi-plus</v-icon>
                 Create a category
@@ -81,7 +81,7 @@
         </v-list>
         <v-list dense>
           <v-subheader>Notifications</v-subheader>
-          <v-btn color="default" class="mb-4" x-small text
+          <v-btn color="default" class="mb-4" x-small
                  @click="onEditNotifier(null)">
             <v-icon left>mdi-plus</v-icon>
             Create a notification

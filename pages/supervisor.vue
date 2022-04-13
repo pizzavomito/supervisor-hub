@@ -93,6 +93,7 @@
                         ></v-switch>
                       </v-list-item-action>
                       <v-list-item-content>
+                        <v-list-item-subtitle v-text="item.key"></v-list-item-subtitle>
                         <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
                       </v-list-item-content>
                     </template>

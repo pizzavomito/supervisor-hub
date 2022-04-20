@@ -43,8 +43,7 @@ class GetAllProcessInfo extends Worker {
           const errors = process.filter(x => ['FATAL','UNKNOWN','BACKOFF'].includes(x.statename))
 
           if (errors.length > 0 && this.supervisor.alarmProcessError) {
-            const msg = errors.length+' error(s).'
-            this.notify(msg)
+            this.notify(errors)
           }
 
         }
@@ -54,13 +53,17 @@ class GetAllProcessInfo extends Worker {
 
   }
 
-  notify(msg) {
+  notify(errors) {
+    const msg = errors.length+' error(s).'
     this.supervisor.notifiers.forEach(notifierId => {
       const notifierConfig = this.notifiers.find(x => x.id === notifierId)
       if (typeof notifierConfig !== 'undefined') {
         const notifierInstance = NotifierFactory.create(notifierConfig)
         notifierInstance.supervisor = this.supervisor
         notifierInstance.notifyError(msg)
+        notifierInstance.notify(errors)
+
+
       }
     })
   }

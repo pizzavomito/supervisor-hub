@@ -19,9 +19,9 @@ module.exports = class DiscordNotifier {
         color = '#ff0026'
       }
       const embed = new MessageBuilder()
-        .setTitle('My title here')
+        .setTitle(type)
         .setAuthor(name)
-        .setURL('http://'+this.supervisor.host+':'+this.supervisor.port)
+        .setURL(process.env.SUPERVISOR_HUB_URL)
         .setColor(color)
         // .setThumbnail('https://cdn.discordapp.com/embed/avatars/0.png')
         // .setDescription('Oh look a description :)')
@@ -29,7 +29,7 @@ module.exports = class DiscordNotifier {
         // .setFooter('Hey its a footer', 'https://cdn.discordapp.com/embed/avatars/0.png')
         .setTimestamp()
       processes.forEach(process => {
-        embed.addField(process.group + process.name, process.statename + ' ' + process.spawnerr, true)
+        embed.addField(process.group + ' : ' + process.name, process.statename + ' ' + process.spawnerr, true)
       })
 
       this.hook.send(embed)

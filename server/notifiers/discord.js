@@ -29,9 +29,9 @@ module.exports = class DiscordNotifier {
         // .setFooter('Hey its a footer', 'https://cdn.discordapp.com/embed/avatars/0.png')
         .setTimestamp()
       if (processes.length > 0) {
-        processes.forEach(process => {
+        for (const process of processes) {
           embed.addField(process.group + ' : ' + process.name, process.statename + ' ' + process.spawnerr, true)
-        })
+        }
       }
 
 

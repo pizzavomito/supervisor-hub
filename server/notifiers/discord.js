@@ -28,9 +28,12 @@ module.exports = class DiscordNotifier {
         // .setImage('https://cdn.discordapp.com/embed/avatars/0.png')
         // .setFooter('Hey its a footer', 'https://cdn.discordapp.com/embed/avatars/0.png')
         .setTimestamp()
-      processes.forEach(process => {
-        embed.addField(process.group + ' : ' + process.name, process.statename + ' ' + process.spawnerr, true)
-      })
+      if (processes.length > 0) {
+        processes.forEach(process => {
+          embed.addField(process.group + ' : ' + process.name, process.statename + ' ' + process.spawnerr, true)
+        })
+      }
+
 
       this.hook.send(embed)
 
